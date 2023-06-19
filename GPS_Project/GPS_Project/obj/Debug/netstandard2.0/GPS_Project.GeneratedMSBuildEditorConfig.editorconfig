@@ -1,0 +1,6 @@
+is_global = true
+build_property.OutputType = Library
+build_property.TargetFrameworkIdentifier = .NETStandard
+build_property.RootNamespace = GPS_Project
+build_property.RootNamespace = GPS_Project
+build_property.ProjectDir = C:\Users\user\source\repos\GpsTrackerBackup\GpsTracker\GPS_Project\GPS_Project\

@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:GPS_Project.Controls"
+             x:Class="GPS_Project.Views.SetupView"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource ColorBlack}">
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto,*,0.4*" RowSpacing="0">
+            <!--#region HeaderLayout-->
+            <StackLayout BackgroundColor="{StaticResource ColorGreen}" Padding="25" Spacing="15">
+                <Label Text="GPS" TextColor="{StaticResource ColorWhite}" FontSize="24"/>
+                <Label Text="SETUP" TextColor="{StaticResource ColorWhite}" FontSize="18" HorizontalOptions="Center"
+                       Margin="0,10,0,0"/>
+            </StackLayout>
+            <!--#endregion-->
+
+            <!--#region DataLayout-->
+            <Grid Grid.Row="1" Padding="5" Margin="0,10,0,0"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                  ColumnDefinitions="*,*" 
+                  ColumnSpacing="10"
+                  BackgroundColor="{StaticResource ColorBlack}">
+                <controls:LabelWithHeader Grid.Row="0" Grid.Column="0"
+                                          Heading="Latitude" Text="{Binding Latitude}"
+                                         />
+                <controls:LabelWithHeader Grid.Row="0" Grid.Column="1"
+                                          Heading="Longitude" Text="{Binding Longitude}"
+                                          />
+                <controls:LabelWithHeader Grid.Row="1" Grid.Column="0"
+                                          Heading="Heading" 
+                                          Text="{Binding Heading}"/>
+                <controls:LabelWithHeader Grid.Row="1" Grid.Column="1"
+                                          Heading="Heading Accuracy" Text="{Binding HeadingAccuracy}"
+                                          />
+                <controls:LabelWithHeader Grid.Row="2" Grid.Column="0"
+                                          Heading="Position Accuracy" Text="{Binding PositionAccuracy}"/>
+                <controls:LabelWithHeader Grid.Row="2" Grid.Column="1"
+                                          Heading="Speed MPH" Text="{Binding Speed}"/>
+                <controls:LabelWithHeader Heading="Timestamp" TextColor="{StaticResource ColorWhite}"
+                                          Text="{Binding TimeStamp}"
+                                          Grid.Row="3" Grid.Column="0"/>
+                <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Vertical">
+                    <StackLayout  Margin="20,-5,0,0">
+                        <Label Text="Accuracy" TextColor="{StaticResource ColorWhite}" FontSize="14" />
+                        <Picker TextColor="Red" Margin="0,-5,0,0" SelectedItem="{Binding SelectedAccuracy}" 
+                            Title="Options">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Best</x:String>
+                                    <x:String>High</x:String>
+                                    <x:String>Medium</x:String>
+                                    <x:String>Default</x:String>
+                                    <x:String>Low</x:String>
+                                    <x:String>Lowest</x:String>
+
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </StackLayout>
+                    <BoxView HorizontalOptions="FillAndExpand" Style="{StaticResource EntryLine}" Margin="0,-6,0,0"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Margin="20,15,0,0">
+                    <Label Text="Logs/Seconds" TextColor="{StaticResource ColorWhite}"/>
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <Entry TextColor="{StaticResource ColorWhite}" Text="{Binding Seconds}" FontSize="15"
+                               Keyboard="Numeric"/>
+                        <BoxView Style="{StaticResource EntryLine}" Margin="0,-5,0,0"/>
+                    </StackLayout>
+                </StackLayout>
+                <controls:LabelWithHeader Heading="Status" TextColor="{StaticResource ColorWhite}"
+                                          Grid.Row="4" Grid.Column="1" Text="{Binding GpsStatus}"/>
+
+                <StackLayout Grid.Row="5" Grid.Column="0" >
+                    <StackLayout Orientation="Horizontal" Margin="20,5,0,0">
+                        <Label Text="Distance Mode" TextColor="{StaticResource ColorWhite}"/>
+                        <Switch  IsToggled="{Binding IsDistanceMode}"/>
+                    </StackLayout>
+                    <BoxView Style="{StaticResource EntryLine}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="20,10,0,0">
+                    <Label Text="Logs/Meter" TextColor="{StaticResource ColorWhite}"/>
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        <Entry Text="{Binding Meters}" TextColor="{StaticResource ColorWhite}" FontSize="15"
+                               Keyboard="Numeric"/>
+                        <BoxView Style="{StaticResource EntryLine}" Margin="0,-5,0,0"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Grid.Row="6" Grid.ColumnSpan="2">
+                    <Label Text="{Binding AppStatusText}" TextColor="{StaticResource ColorWhite}" Margin="0,10,0,0"
+                           FontSize="22" HorizontalOptions="Center" FontAttributes="Bold"/>
+                </StackLayout>
+
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region Button/Footer Layout-->
+            <StackLayout Grid.Row="2" BackgroundColor="{StaticResource ColorBlack}" Padding="20" Margin="0,-10,0,0"            
+                         Spacing="15">
+                <Button x:Name="gpsButton" Style="{StaticResource ButtonStyle}" Text="{Binding GpsButtonText}" Command="{Binding GpsCommand}"
+
+                        CommandParameter="{Binding Source={x:Reference gpsButton},Path=Text}"/>
+                <Button Style="{StaticResource ButtonStyle}" Text="LOGS" Command="{Binding LogsPageCommand}"/>
+            </StackLayout>
+            <!--#endregion-->
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

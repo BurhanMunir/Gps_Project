@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GPS_Project.Views.LogsView"
+             NavigationPage.HasNavigationBar="False"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto,*,Auto" RowSpacing="0" BackgroundColor="{StaticResource ColorBlack}">
+            <!--#region Header Layout-->
+            <Grid BackgroundColor="{StaticResource ColorGreen}"
+                  RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,Auto"
+                  Padding="20">
+                <Label Text="GPS" TextColor="{StaticResource ColorWhite}" FontSize="24">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GpsPageCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Grid.Row="0" Grid.Column="2"
+                    Text="CLEAR" TextColor="{StaticResource ColorWhite}" FontSize="18">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LogClearCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Grid.Row="2" Grid.Column="1" Text="LOGS" TextColor="{StaticResource ColorWhite}"
+                       HorizontalOptions="Center" FontSize="18"/>
+            </Grid>
+            <!--#endregion-->
+            <!--#region Collectionview Layout-->
+            <Grid Grid.Row="1" BackgroundColor="{StaticResource ColorBlack}"
+                  >
+                <CollectionView ItemsSource="{Binding LogsCollection}"
+                                x:Name="logList"
+                               ItemsUpdatingScrollMode="KeepLastItemInView"
+                                Margin="0,0,0,10">
+                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="2*,Auto,Auto"
+                                  Padding="5,10,0,0">
+                                <Label Text="{Binding TimeStamp}" TextColor="{StaticResource ColorWhite}" FontSize="13"/>
+                                
+                                    <Label TextColor="{StaticResource ColorWhite}" Grid.Row="0" Grid.Column="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Lat:" FontSize="13" FontAttributes="Bold"/>
+                                            <Span Text="{Binding Latitude}" FontSize="13" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                <Label TextColor="{StaticResource ColorWhite}" Grid.Row="0" Grid.Column="3">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Lon:" FontAttributes="Bold" FontSize="13"/>
+                                            <Span Text="{Binding Longitude}" FontSize="13"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Grid.Row="1" Grid.Column="0" TextColor="{StaticResource ColorWhite}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Accuracy:" FontSize="13"/>
+                                            <Span Text="{Binding Accuracy}" FontSize="13"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Grid.Row="1" Grid.Column="1" TextColor="{StaticResource ColorWhite}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="MPH:" FontSize="13"/>
+                                            <Span Text="{Binding Speed}" FontSize="13"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Grid.Row="1" Grid.Column="3" TextColor="{StaticResource ColorWhite}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Heading:" FontSize="13"/>
+                                            <Span Text="{Binding Heading}" FontSize="13"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <BoxView Style="{StaticResource EntryLine}" Grid.Row="2" Grid.ColumnSpan="5"
+                                         HeightRequest="2"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+               
+               
+            </Grid>
+            <StackLayout Grid.Row="2" BackgroundColor="{StaticResource ColorBlack}"
+                         Padding="20">
+                <Button Style="{StaticResource ButtonStyle}" Text="Export"
+                        Command="{Binding ExportJsonCommand}"/>
+            </StackLayout>
+            <!--#endregion-->  
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

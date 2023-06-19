@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GPS_Project.Controls.LabelWithHeader"
+             x:Name="this"
+             Orientation="Vertical">
+
+    <Label  TextColor="{StaticResource ColorWhite}" FontSize="14" Margin="20,-4,0,-5"
+           x:Name="lblHeader"/>
+    <Label x:Name="txt"  Margin="20,0,0,0" FontSize="12"
+           Text="{Binding Source={x:Reference this},Path=Text}"
+           />
+    <BoxView HorizontalOptions="FillAndExpand" Style="{StaticResource EntryLine}" Margin="0,-5,0,0"/>
+</StackLayout>
